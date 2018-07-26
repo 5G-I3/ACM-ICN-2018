@@ -1,0 +1,78 @@
+APPLICATION = ndn_hopp
+# If no BOARD is found in the environment, use this default:
+BOARD ?= native
+
+BOARD_WHITELIST := fox iotlab-m3 msba2 mulle native pba-d-01-kw2x samr21-xpro
+
+
+# This has to be the absolute path to the RIOT base directory:
+RIOTBASE ?= $(CURDIR)/../../..
+
+# Comment this out to disable code in RIOT that does safety checking
+# which is not needed in a production environment but helps in the
+# development process:
+DEVELHELP ?= 1
+
+CFLAGS += -DUSE_LINKLAYER
+CFLAGS += -DCCNL_UAPI_H_
+CFLAGS += -DUSE_SUITE_NDNTLV
+CFLAGS += -DNEEDS_PREFIX_MATCHING
+CFLAGS += -DNEEDS_PACKET_CRAFTING
+
+CFLAGS += -DCONSUMER_THREAD_PRIORITY="THREAD_PRIORITY_MAIN-1"
+CFLAGS += -DPKTCNT_PRIO="THREAD_PRIORITY_MAIN-2"
+CFLAGS += -DHOPP_PRIO="THREAD_PRIORITY_MAIN-3"
+CFLAGS += -DCCNL_THREAD_PRIORITY="THREAD_PRIORITY_MAIN-4"
+
+CFLAGS += -DCCNL_FACE_TIMEOUT=10
+CFLAGS += -DNDN_DEFAULT_INTEREST_LIFETIME=10000
+CFLAGS += -DCCNL_MAX_INTEREST_RETRANSMIT=4
+CFLAGS += -DCCNL_INTEREST_RETRANS_TIMEOUT=2000
+CFLAGS += -DCCNL_STACK_SIZE="THREAD_STACKSIZE_DEFAULT+512"
+CFLAGS += -DCCNL_QUEUE_SIZE=32
+CFLAGS += -D_NETIF_NETAPI_MSG_QUEUE_SIZE=32
+
+CFLAGS += -DCOMPAS_PREFIX_LEN=3
+CFLAGS += -DCOMPAS_NAME_SUFFIX_LEN=16
+CFLAGS += -DCOMPAS_NAM_CACHE_LEN=45
+CFLAGS += -DCCNL_CACHE_SIZE=50
+CFLAGS += -DHOPP_TRICKLE_IMIN=128
+CFLAGS += -DHOPP_TRICKLE_REDCONST=3
+CFLAGS += -DHOPP_NAM_STALE_TIME=10000000
+CFLAGS += -DCOMPAS_NAM_CACHE_RETRIES=4
+CFLAGS += -DHOPP_NAM_PERIOD_BASE=2000
+CFLAGS += -DHOPP_PARENT_TIMEOUT_PERIOD_BASE=1800000
+CFLAGS += -DHOPP_PARENT_TIMEOUT_PERIOD_JITTER=180000
+CFLAGS += -DHOPP_STACKSZ="THREAD_STACKSIZE_DEFAULT+512"
+CFLAGS += -DHOPP_QSZ=32
+
+CFLAGS += -DPKTCNT_STACKSIZE=768
+CFLAGS += -DCONSUMER_STACKSIZE=1024
+
+ifneq (,$(filter pktcnt_fast,$(USEMODULE)))
+  USEMODULE += netstats_l2
+endif
+
+# Change this to 0 show compiler invocation lines by default:
+QUIET ?= 1
+
+USEMODULE += ps
+USEMODULE += shell
+USEMODULE += shell_commands
+# Include packages that pull up and auto-init the link layer.
+# NOTE: 6LoWPAN will be included if IEEE802.15.4 devices are present
+USEMODULE += gnrc_netdev_default
+USEMODULE += auto_init_gnrc_netif
+USEMODULE += timex
+USEMODULE += xtimer
+USEMODULE += random
+USEMODULE += prng_xorshift
+USEMODULE += evtimer
+USEMODULE += pktcnt
+USEMODULE += hopp
+
+USEPKG += compas
+USEPKG += tlsf
+USEPKG += ccn-lite
+
+include $(RIOTBASE)/Makefile.include
