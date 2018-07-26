@@ -1,6 +1,6 @@
 APPLICATION = ndn_hopp
 # If no BOARD is found in the environment, use this default:
-BOARD ?= native
+BOARD ?= iotlab-m3
 
 BOARD_WHITELIST := fox iotlab-m3 msba2 mulle native pba-d-01-kw2x samr21-xpro
 
