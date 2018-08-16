@@ -309,11 +309,6 @@ void gcoap_cli_init(void)
     gnrc_netif_t *netif = gnrc_netif_iter(NULL);
     netopt_enable_t set = NETOPT_ENABLE;
     gnrc_netapi_set(netif->pid, NETOPT_TX_END_IRQ, 0, &set, sizeof(set));
-#else
-    if (pktcnt_init() != PKTCNT_OK) {
-        puts("error: unable to initialize pktcnt");
-        return;
-    }
 #endif
     gcoap_register_listener(&_listener);
 }

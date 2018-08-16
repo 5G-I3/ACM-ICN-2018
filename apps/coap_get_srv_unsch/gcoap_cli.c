@@ -352,11 +352,6 @@ void gcoap_cli_init(void)
     gnrc_netif_t *netif = gnrc_netif_iter(NULL);
     netopt_enable_t set = NETOPT_ENABLE;
     gnrc_netapi_set(netif->pid, NETOPT_TX_END_IRQ, 0, &set, sizeof(set));
-#else
-    if (pktcnt_init() != PKTCNT_OK) {
-        puts("error: unable to initialize pktcnt");
-        return;
-    }
 #endif
     thread_create(data_gen_stack, DATA_GEN_STACK_SIZE, DATA_GEN_PRIO,
                   THREAD_CREATE_STACKTEST, data_gen, NULL, "i3-data-gen");
