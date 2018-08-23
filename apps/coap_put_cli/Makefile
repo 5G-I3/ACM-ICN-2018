@@ -15,6 +15,7 @@ DEFAULT_CHANNEL ?= 11
 
 MEDIAN_WAIT   ?= 1000
 MAX_REQ       ?= 100
+SERVER        ?= "2001:db8::1"
 
 ifneq (,$(CONFIRMABLE))
   CFLAGS += -DI3_CONFIRMABLE
@@ -31,6 +32,7 @@ CFLAGS += -DIEEE802154_DEFAULT_CHANNEL=$(DEFAULT_CHANNEL)
 CFLAGS += -DI3_MIN_WAIT=$(shell echo "$$(( $(MEDIAN_WAIT) - ($(MEDIAN_WAIT) / 2) ))")
 CFLAGS += -DI3_MAX_WAIT=$(shell echo "$$(( $(MEDIAN_WAIT) + ($(MEDIAN_WAIT) / 2) ))")
 CFLAGS += -DI3_MAX_REQ=$(MAX_REQ)
+CFLAGS += -DI3_SERVER="\"$(SERVER)\""
 
 USEMODULE += gnrc_netdev_default
 USEMODULE += auto_init_gnrc_netif
