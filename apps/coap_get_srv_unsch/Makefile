@@ -17,7 +17,7 @@ TAP              ?= tap0
 IPV6_PREFIX      ?= 2001:db8::/64
 ETHOS_BAUDRATE   ?= 500000
 
-ifneq (,$(I3_CONFIRMABLE))
+ifneq (,$(CONFIRMABLE))
   CFLAGS += -DI3_CONFIRMABLE
   CFLAGS += -DGCOAP_RESEND_BUFS_MAX=120
 endif
