@@ -41,6 +41,7 @@ USEMODULE += shell_commands
 USEMODULE += ps
 USEMODULE += xtimer
 USEMODULE += pktcnt
+# USEMODULE += pktcnt_fast
 
 QUIET ?= 1
 

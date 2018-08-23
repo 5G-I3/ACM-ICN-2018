@@ -30,6 +30,7 @@ USEMODULE += gnrc_sock_udp
 USEMODULE += gnrc_ipv6_router_default
 USEMODULE += asymcute
 USEMODULE += pktcnt
+# USEMODULE += pktcnt_fast
 USEMODULE += fmt
 USEMODULE += gnrc_rpl
 USEMODULE += auto_init_gnrc_rpl

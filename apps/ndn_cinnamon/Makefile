@@ -61,6 +61,7 @@ USEMODULE += random
 USEMODULE += prng_xorshift
 USEMODULE += evtimer
 USEMODULE += pktcnt
+# USEMODULE += pktcnt_fast
 USEMODULE += hopp
 
 USEPKG += compas

@@ -31,6 +31,7 @@ USEMODULE += shell
 USEMODULE += shell_commands
 USEMODULE += ps
 USEMODULE += pktcnt
+# USEMODULE += pktcnt_fast
 
 QUIET ?= 1
 

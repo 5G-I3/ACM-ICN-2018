@@ -39,6 +39,7 @@ USEMODULE += shell
 USEMODULE += shell_commands
 USEMODULE += ps
 USEMODULE += pktcnt
+# USEMODULE += pktcnt_fast
 USEMODULE += gnrc_rpl
 USEMODULE += auto_init_gnrc_rpl
 USEMODULE += gnrc_uhcpc
