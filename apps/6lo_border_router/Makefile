@@ -21,9 +21,15 @@ CFLAGS += -DGNRC_IPV6_NIB_NUMOF=64
 CFLAGS += -DGNRC_IPV6_NIB_OFFL_NUMOF=64
 CFLAGS += -DGNRC_RPL_LIFETIME_UNIT=0
 CFLAGS += -D_NETIF_NETAPI_MSG_QUEUE_SIZE=32
+CFLAGS += -DETHOS_BAUDRATE=$(ETHOS_BAUDRATE) -DUSE_ETHOS_FOR_STDIO
 CFLAGS += -DIEEE802154_DEFAULT_CHANNEL=$(DEFAULT_CHANNEL)
 
-USEMODULE += socket_zep
+# We override the `make term` command to use ethos
+TERMDEPS += host-tools
+TERMPROG ?= sudo sh $(RIOTTOOLS)/ethos/start_network.sh
+TERMFLAGS ?= $(PORT) $(TAP) $(IPV6_PREFIX)
+
+USEMODULE += ethos
 USEMODULE += gnrc_netdev_default
 USEMODULE += auto_init_gnrc_netif
 USEMODULE += gnrc_sixlowpan_border_router_default
@@ -36,11 +42,6 @@ USEMODULE += pktcnt
 USEMODULE += gnrc_rpl
 USEMODULE += auto_init_gnrc_rpl
 USEMODULE += gnrc_uhcpc
-
-# We override the `make term` command to use ethos
-TERMDEPS += host-tools
-TERMPROG ?= sudo sh $(RIOTTOOLS)/ethos/start_network.sh
-TERMFLAGS ?= $(PORT) $(TAP) $(IPV6_PREFIX)
 
 QUIET ?= 1
 
