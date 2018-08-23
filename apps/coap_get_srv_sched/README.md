@@ -1,4 +1,4 @@
-# CoAP GET server with scheduled data emission
+# CoAP GET server with scheduled content generation
 
 ## Usage
 

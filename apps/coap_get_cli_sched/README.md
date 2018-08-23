@@ -1,4 +1,4 @@
-# CoAP GET client for scheduled data emission
+# CoAP GET client for scheduled content generation
 
 ## Usage
 
