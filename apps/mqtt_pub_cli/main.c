@@ -37,8 +37,7 @@
 
 #define I3_TOPIC            "/i3/gasval"
 #ifndef I3_BROKER
-#define I3_BROKER           { 0xaf, 0xfe, 0, 0, 0, 0, 0, 0, \
-                              0, 0, 0, 0, 0, 0, 0, 1 }
+#define I3_BROKER           "affe::1"
 #endif
 #ifndef I3_MIN_WAIT
 #define I3_MIN_WAIT (1000)
@@ -77,8 +76,7 @@ extern char pktcnt_addr_str[17];
 #endif
 static const char *payload = "{\"id\":\"0x12a77af232\",\"val\":3000}";
 static char client_id[(2 * GNRC_NETIF_L2ADDR_MAXLEN) + 1];
-static sock_udp_ep_t gw = { .family = AF_INET6, .port = I3_PORT,
-                            .addr = { .ipv6 = I3_BROKER } };
+static sock_udp_ep_t gw = { .family = AF_INET6, .port = I3_PORT };
 #ifdef I3_CONFIRMABLE
 static const unsigned flags = MQTTSN_QOS_1;
 #else
@@ -117,6 +115,9 @@ static void _connect(void)
 {
     asymcute_req_t *req = _get_req_ctx();
     assert(!asymcute_is_connected(&_connection));
+    if (ipv6_addr_from_str((ipv6_addr_t *)&gw.addr.ipv6, I3_BROKER) == NULL) {
+        puts("Unable to parse broker address");
+    }
     asymcute_connect(&_connection, req, &gw, client_id, true, NULL);
 }
 
