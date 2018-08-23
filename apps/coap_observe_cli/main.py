@@ -40,7 +40,7 @@ def _get_timeout():
     return random.randint(OBSERVE_TIMEOUT_MIN * 1000,
                           OBSERVE_TIMEOUT_MAX * 1000) / 1000
 
-async def main(addr, timeout):
+async def main(addr):
     global successful_observations
     uri = "coap://{}/i3/gasval".format(addr)
     print("OBSERVE request to '{}'".format(uri))
@@ -87,16 +87,10 @@ async def main(addr, timeout):
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("addrs", default="[::1]:5683", nargs="+",
-                   help="IPv6 address of target node")
-    p.add_argument("interval", default="1", nargs="?",
-                   help="Request interval")
-    p.add_argument("-c", "--confirmable", action="store_true",
-                   help="Send CoAP message as confirmable")
-    p.add_argument("-t", "--timeout", default=1,
-                   help="Timeout for follow-up response")
+                   help="IPv6 addresses of target nodes")
     args = p.parse_args()
     start_observe = None
     while start_observe != "start_observe":
         start_observe = input("Type \"start_observe\" to start OBSERVE")
-    tasks = map(lambda addr: main(addr, args.timeout), args.addrs)
+    tasks = map(lambda addr: main(addr), args.addrs)
     asyncio.get_event_loop().run_until_complete(asyncio.gather(*tasks))
