@@ -32,7 +32,7 @@ according to the IoT-LAB's [border router tutorial]. Now either wait for RPL to
 construct a full DODAG (the root should have routes to at least `MAX_SERVER`
 nodes) or configure the routes to `MAX_SERVER` M3 nodes. You can check or
 configure that with the `nib route`, the addresses you can get for each node
-with the `ifconfig` command).
+with the `ifconfig` command.
 
 If you want to disable RPL during your experiment you can do that with the
 `rpl kill` command.
