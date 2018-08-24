@@ -1,0 +1,4 @@
+[submodule "RIOT"]
+	path = RIOT
+	url = https://github.com/5G-I3/RIOT-public.git
+	branch = acm-icn-18

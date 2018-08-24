@@ -6,7 +6,7 @@ BOARD ?= iotlab-m3
 
 BOARD_WHITELIST := iotlab-m3
 
-RIOTBASE ?= $(CURDIR)/../../../RIOT-I3
+RIOTBASE ?= $(CURDIR)/../../RIOT
 
 DEVELHELP ?= 1
 
