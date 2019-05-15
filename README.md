@@ -1,15 +1,9 @@
 # NDN, CoAP, and MQTT: A Comparative Measurement Study in the IoT
 Code and documentation to reproduce our experimental results
 
-**WIP:** Documentation on NDN applications and information below will be updated very soon.
+## Code
+The explicit RIOT version is included as a submodule in this repository.
+The `apps` folder contains the RIOT and CCN-lite applications that we used to perform our experiments.
 
 ## Documentation
-- TODO: Link to paper here
-
-## Code
-
-### CCN-lite
-
-### HoPP
-
-### RIOT
+[Paper](https://conferences.sigcomm.org/acm-icn/2018/proceedings/icn18-final46.pdf)
